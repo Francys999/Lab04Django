@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Registrados</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* General */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #e0f7fa; /* Fondo celeste pastel */
+            margin: 0;
+            padding: 0;
+            color: #333;
+            height: 100vh; /* Asegura que el cuerpo ocupe toda la altura de la pantalla */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra el contenido horizontalmente */
+            justify-content: center; /* Centra el contenido verticalmente */
+        }
+
+        h1 {
+            color: #00796b; /* Un verde oscuro para el título */
+            text-align: center;
+            margin-top: 40px;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        /* Enlace del botón */
+        a.add-button {
+            background-color: #4caf50;
+            padding: 12px 40px;
+            border-radius: 25px;
+            font-size: 18px;
+            color: white;
+            display: inline-block;
+            text-align: center;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        a.add-button:hover {
+            background-color: #388e3c;
+        }
+
+        /* Lista de ejercicios */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        li {
+            background-color: #ffffff; /* Fondo blanco para los items */
+            margin: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            width: 85%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            color: #00796b; /* Verde oscuro para texto */
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        li span {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        li:hover {
+            background-color: #f1f8e9; /* Color sutil al pasar el mouse */
+            transform: translateY(-5px);
+        }
+
+        /* Estilos para pantallas más grandes */
+        @media (min-width: 768px) {
+            ul {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            li {
+                width: 45%;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            li {
+                width: 30%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Organizador de Entrenamientos</h1>
+    <a href="{% url 'add_exercise' %}" class="add-button">Agregar nuevo ejercicio</a>
+    <ul>
+        {% for exercise in exercises %}
+            <li>
+                <span><strong>Nombre:</strong> {{ exercise.name }}</span>
+                <span><strong>Duración:</strong> {{ exercise.duration }} minutos</span>
+                <span><strong>Distancia:</strong> {{ exercise.distance }} km</span>
+                <span><strong>Calorías quemadas:</strong> {{ exercise.calories_burned }}</span>
+                <span><strong>Fecha:</strong> {{ exercise.date }}</span>
+            </li>
+        {% empty %}
+            <li>No hay ejercicios registrados.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
