@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Ejercicio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #e0f7fa; /* Fondo celeste pastel */
+            margin: 0;
+            padding: 0;
+            color: #333;
+            height: 100vh; /* Asegura que el cuerpo ocupe toda la altura de la pantalla */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra el contenido horizontalmente */
+            justify-content: center; /* Centra el contenido verticalmente */
+        }
+
+        h1 {
+            color: #00796b; /* Un verde oscuro para el título */
+            text-align: center;
+            margin-top: 40px;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        /* Estilo del botón de confirmación */
+        button {
+            background-color: #d32f2f; /* Rojo para eliminar */
+            color: white;
+            padding: 12px 40px;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #b71c1c;
+        }
+
+        /* Enlace para regresar */
+        a {
+            text-decoration: none;
+            color: #0288d1;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>¿Estás seguro de que deseas eliminar este ejercicio?</h1>
+    <p><strong>Nombre:</strong> {{ exercise.name }}</p>
+    <p><strong>Duración:</strong> {{ exercise.duration }} minutos</p>
+    <p><strong>Distancia:</strong> {{ exercise.distance }} km</p>
+    <p><strong>Calorías quemadas:</strong> {{ exercise.calories_burned }}</p>
+    <p><strong>Fecha:</strong> {{ exercise.date }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sí, eliminar</button>
+    </form>
+
+    <a href="{% url 'home' %}">Volver a la lista</a>
+</body>
+</html>

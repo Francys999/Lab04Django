@@ -111,6 +111,11 @@
                 <span><strong>Distancia:</strong> {{ exercise.distance }} km</span>
                 <span><strong>Calorías quemadas:</strong> {{ exercise.calories_burned }}</span>
                 <span><strong>Fecha:</strong> {{ exercise.date }}</span>
+                <!-- Enlaces para editar y eliminar -->
+                <div style="margin-top: 10px;">
+                    <a href="{% url 'edit_exercise' exercise.pk %}" style="color: #0288d1; text-decoration: none;">Editar</a> | 
+                    <a href="{% url 'delete_exercise' exercise.pk %}" style="color: #d32f2f; text-decoration: none;">Eliminar</a>
+                </div>
             </li>
         {% empty %}
             <li>No hay ejercicios registrados.</li>

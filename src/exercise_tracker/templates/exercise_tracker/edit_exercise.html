@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Ejercicio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #e0f7fa; /* Fondo celeste pastel */
+            margin: 0;
+            padding: 0;
+            color: #333;
+            height: 100vh; /* Asegura que el cuerpo ocupe toda la altura de la pantalla */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra el contenido horizontalmente */
+            justify-content: center; /* Centra el contenido verticalmente */
+        }
+
+        h1 {
+            color: #00796b; /* Un verde oscuro para el título */
+            text-align: center;
+            margin-top: 40px;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 85%;
+            max-width: 500px;
+        }
+
+        form input,
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        button {
+            background-color: #4caf50; /* Verde para guardar */
+            color: white;
+            padding: 12px 40px;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #388e3c;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0288d1;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Editar Ejercicio</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Cambios</button>
+    </form>
+    <a href="{% url 'home' %}">Volver a la lista</a>
+</body>
+</html>
