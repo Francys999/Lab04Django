@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicios Registrados</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* General */
         body {
@@ -18,7 +18,7 @@
             display: flex;
             flex-direction: column;
             align-items: center; /* Centra el contenido horizontalmente */
-            justify-content: center; /* Centra el contenido verticalmente */
+            justify-content: flex-start; /* Centra el contenido verticalmente */
         }
 
         h1 {
@@ -98,11 +98,25 @@
                 width: 30%;
             }
         }
+
+        /* Estilo del gráfico */
+        .chart-container {
+            width: 80%;
+            max-width: 800px;
+            margin-top: 30px;
+        }
     </style>
 </head>
 <body>
     <h1>Organizador de Entrenamientos</h1>
     <a href="{% url 'add_exercise' %}" class="add-button">Agregar nuevo ejercicio</a>
+
+    <!-- Contenedor del gráfico de rendimiento -->
+    <div class="chart-container">
+        <canvas id="performanceChart"></canvas>
+    </div>
+
+    <!-- Lista de ejercicios -->
     <ul>
         {% for exercise in exercises %}
             <li>
@@ -121,5 +135,47 @@
             <li>No hay ejercicios registrados.</li>
         {% endfor %}
     </ul>
+
+    <script>
+        // Asegúrate de que los datos están disponibles para el gráfico
+        const performanceData = {
+            datasets: [{
+                label: 'Rendimiento',
+                data: [
+                    {% for exercise in exercises %}
+                        {x: {{ exercise.duration }}, y: {{ exercise.calories_burned }}},
+                    {% endfor %}
+                ],
+                backgroundColor: 'rgba(76, 175, 80, 0.2)',  // Color verde suave
+                borderColor: 'rgba(76, 175, 80, 1)',  // Color verde oscuro
+                borderWidth: 1
+            }]
+        };
+
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+
+        // Crear gráfico de dispersión (scatter plot) para rendimiento
+        new Chart(ctx, {
+            type: 'scatter',  // Tipo de gráfico de dispersión
+            data: performanceData,
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Duración (minutos)'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Calorías quemadas'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
 </body>
 </html>
